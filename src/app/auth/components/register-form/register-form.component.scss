@@ -1,0 +1,37 @@
+.register-form {
+  .submit-btn {
+    @apply
+      font-bold uppercase text-center text-white text-lg
+    bg-[#ff6200]
+      p-4 w-[200px]
+      relative;
+    
+      &:disabled {
+        @apply cursor-not-allowed opacity-70
+      }
+
+      &.loading::before {
+        content: ' ';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        border: 3px solid #0000001a;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border-left-color: #FFF;
+      
+        animation: loadingSpin 0.5s ease infinite;
+      }
+      
+      @keyframes loadingSpin {
+        0% {
+          transform: rotate(0deg);
+        }
+      
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+  }
+}

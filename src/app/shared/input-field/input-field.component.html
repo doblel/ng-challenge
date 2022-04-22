@@ -1,0 +1,17 @@
+<div class="field">
+    <input
+        class="field__input"
+        [attr.type]="type"
+        [attr.name]="name"
+        [attr.placeholder]="placeholder"
+        [attr.id]="inputId"
+        [disabled]="disabled"
+        (input)="onInput($event)"
+        (blur)="onTouch()"
+        [value]="value"
+        [ngClass]="{'error': invalid}"
+    >
+    <label [attr.for]="inputId" class="field__label">{{ label }}</label>
+    <app-input-hint type="error" *ngIf="invalid && errorMessage">{{ errorMessage }}</app-input-hint>
+    <ng-content select="[hints]"></ng-content>
+</div>

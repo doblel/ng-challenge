@@ -1,0 +1,15 @@
+.hint {
+  @apply block w-full ml-2 text-[12px];
+  
+  &:not(:last-child) {
+    @apply mb-0.5;
+  }
+
+  &--error {
+    @apply text-red-600;
+  }
+
+  &--success {
+    @apply text-green-600;
+  }
+}

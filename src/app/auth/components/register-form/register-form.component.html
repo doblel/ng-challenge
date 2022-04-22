@@ -1,0 +1,78 @@
+<form class="register-form" [formGroup]="form" (ngSubmit)="registerUser()">
+    <app-input-field
+        name="firstName"
+        inputId="firstName"
+        formControlName="firstName"
+        label="first name"
+        errorMessage="First name is required."
+        [invalid]="!!firstNameInvalid"
+    ></app-input-field>
+    <app-input-field
+        name="lastName"
+        inputId="lastName"
+        formControlName="lastName"
+        label="last name"
+        errorMessage="Last name is required."
+        [invalid]="!!lastNameInvalid"
+    ></app-input-field>
+    <app-input-field
+        type="email"
+        name="email"
+        inputId="email"
+        formControlName="email"
+        label="email"
+        [errorMessage]="
+            email?.errors?.['required'] 
+            ? 'Email is required.' 
+            : 'Email address is not in the correct format.'
+        "
+        [invalid]="!!emailInvalid"
+    ></app-input-field>
+    <app-input-field
+        type="password"
+        name="password"
+        inputId="password"
+        label="password"
+        formControlName="password"
+        [invalid]="!!passwordInvalid"
+    >
+        <div hints *ngIf="password?.touched" class="mb-1">
+            <p>Your password must:</p>
+            <app-input-hint [type]="password?.errors?.['minLength'] ? 'error' : 'success'">
+                Be at least eight characters.
+            </app-input-hint>
+            <app-input-hint [type]="password?.errors?.['lowerCaseRequired'] ? 'error' : 'success'">
+                Include at least one lowecase letter.
+            </app-input-hint>
+            <app-input-hint [type]="password?.errors?.['upperCaseRequired'] ? 'error' : 'success'">
+                Include at least one uppercase letter.
+            </app-input-hint>
+            <app-input-hint [type]="form?.errors?.['passwordIncludesName'] ? 'error' : 'success'">
+                Not contain your first name or last name.
+            </app-input-hint>
+        </div>
+    </app-input-field>
+    <app-input-field
+        type="password"
+        name="confirmPassword"
+        inputId="confirmPassword"
+        formControlName="confirmPassword"
+        label="confirm password"
+        [errorMessage]="
+            form?.errors?.['passwordConfirmationRequired']
+            ? 'Password confirmation is required.'
+            : 'Password needs to match.'
+        "
+        [invalid]="!!confirmPasswordInvalid"
+    ></app-input-field>
+    <div class="flex justify-center items-center mt-3">
+        <button
+            type="submit"
+            [disabled]="loading"
+            [ngClass]="{'loading': loading}"
+            class="submit-btn flex justify-center"
+        >
+            register
+        </button>
+    </div>
+</form>
